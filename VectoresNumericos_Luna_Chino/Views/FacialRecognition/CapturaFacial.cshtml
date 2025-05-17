@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Captura Facial";
+}
+
+<h2>Captura de Imagen Facial</h2>
+
+<!-- Mostrar la cámara -->
+<video id="video" width="320" height="240" autoplay></video>
+
+<!-- Canvas oculto para capturar la imagen -->
+<canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+<br />
+
+<!-- Botón para capturar foto -->
+<button id="snap">Tomar Foto</button>
+
+<!-- Mostrar la foto capturada -->
+<img id="photo" src="" alt="Foto capturada" style="display:none; margin-top:10px;" />
+
+<br />
+
+<!-- Campo para ingresar nombre -->
+<label for="nombre">Nombre:</label>
+<input type="text" id="nombre" placeholder="Ingrese su nombre" />
+
+<br />
+<br />
+
+<!-- Botón para enviar la foto y el nombre -->
+<button id="submitPhoto" style="display:none;">Enviar Foto</button>
+
+<script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photo = document.getElementById('photo');
+    const snap = document.getElementById('snap');
+    const submitPhoto = document.getElementById('submitPhoto');
+    const nombreInput = document.getElementById('nombre');
+
+    // Solicitar acceso a la cámara
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(err => {
+            alert("No se pudo acceder a la cámara: " + err);
+        });
+
+    // Tomar foto y mostrarla
+    snap.addEventListener('click', () => {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const dataUrl = canvas.toDataURL('image/png');
+        photo.src = dataUrl;
+        photo.style.display = 'block';
+
+        submitPhoto.style.display = 'inline-block'; // Mostrar botón para enviar
+    });
+
+    // Enviar foto + nombre al backend
+    submitPhoto.addEventListener('click', () => {
+        const nombre = nombreInput.value.trim();
+        if (!nombre) {
+            alert('Por favor ingresa tu nombre');
+            return;
+        }
+
+        const dataUrl = canvas.toDataURL('image/png');
+
+        fetch('@Url.Action("RecibirFoto", "FacialRecognition")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                imageBase64: dataUrl,
+                nombre: nombre
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                alert('Error al enviar la foto: ' + error);
+            });
+    });
+</script>
