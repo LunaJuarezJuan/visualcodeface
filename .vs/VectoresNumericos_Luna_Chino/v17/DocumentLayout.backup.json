@@ -3,36 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\controllers\\facialrecognitioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\controllers\\facialrecognitioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\views\\facialrecognition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\facialrecognition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\views\\facialrecognition\\capturafacial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\facialrecognition\\capturafacial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\models\\photodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\models\\photodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\views\\docente\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\docente\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\controllers\\docentecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\controllers\\docentecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\views\\docente\\panel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\controllers\\facialrecognitioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\controllers\\facialrecognitioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\controllers\\facialrecognitionapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\controllers\\facialrecognitionapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\models\\docente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\models\\photodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\models\\photodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\models\\userphotodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\models\\userphotodata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\views\\docente\\panel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\docente\\panel.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\views\\docente\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\docente\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\views\\facialrecognition\\capturafacial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\facialrecognition\\capturafacial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\vectoresnumericos_luna_chino\\views\\facialrecognition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\facialrecognition\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|c:\\users\\luna3\\source\\repos\\vectoresnumericos_luna_chino\\vectoresnumericos_luna_chino\\views\\facialrecognitionapi\\captura.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E9A86BDF-3950-47FD-9589-73BCC5BA1DE6}|VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino.csproj|solutionrelative:vectoresnumericos_luna_chino\\views\\facialrecognitionapi\\captura.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,63 +54,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-03T06:57:22.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PhotoData.cs",
               "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Models\\PhotoData.cs",
               "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Models\\PhotoData.cs",
               "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Models\\PhotoData.cs",
               "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Models\\PhotoData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-14T18:47:31.124Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CapturaFacial.cshtml",
-              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
-              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
-              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
-              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAQwFgAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-14T18:26:57.71Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
-              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
-              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
-              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-14T15:45:50.467Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FacialRecognitionController.cs",
-              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
-              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
-              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
-              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAgwEIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T15:19:29.307Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "UserPhotoData.cs",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Models\\UserPhotoData.cs",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Models\\UserPhotoData.cs",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Models\\UserPhotoData.cs",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Models\\UserPhotoData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T15:32:59.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Panel.cshtml",
               "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\Docente\\Panel.cshtml",
               "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\Docente\\Panel.cshtml",
@@ -111,32 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
-              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
-              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
-              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\Docente\\Login.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAiwF4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-03T06:57:22.474Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DocenteController.cs",
-              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
-              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
-              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
-              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T06:51:50.925Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Docente.cs",
               "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Models\\Docente.cs",
               "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Models\\Docente.cs",
@@ -145,6 +119,84 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T06:50:42.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FacialRecognitionApiController.cs",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionApiController.cs",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionApiController.cs",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionApiController.cs",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionApiController.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAQwFoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-17T15:34:30.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FacialRecognitionController.cs",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Controllers\\FacialRecognitionController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAgwEIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T15:19:29.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DocenteController.cs",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Controllers\\DocenteController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwA0AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T06:51:50.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CapturaFacial.cshtml",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\CapturaFacial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-14T18:26:57.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognition\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-14T15:45:50.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Captura.cshtml",
+              "DocumentMoniker": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognitionApi\\Captura.cshtml",
+              "RelativeDocumentMoniker": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognitionApi\\Captura.cshtml",
+              "ToolTip": "C:\\Users\\luna3\\source\\repos\\VectoresNumericos_Luna_Chino\\VectoresNumericos_Luna_Chino\\Views\\FacialRecognitionApi\\Captura.cshtml",
+              "RelativeToolTip": "VectoresNumericos_Luna_Chino\\Views\\FacialRecognitionApi\\Captura.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-17T15:36:07.351Z",
               "EditorCaption": ""
             }
           ]

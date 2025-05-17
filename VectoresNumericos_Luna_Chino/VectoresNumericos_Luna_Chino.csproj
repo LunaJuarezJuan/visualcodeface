@@ -94,12 +94,14 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\FacialRecognitionApiController.cs" />
     <Compile Include="Controllers\FacialRecognitionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\PhotoData.cs" />
+    <Compile Include="Models\UserPhotoData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +111,7 @@
     <Content Include="Views\Docente\Panel.cshtml" />
     <Content Include="Views\FacialRecognition\Index.cshtml" />
     <Content Include="Views\FacialRecognition\CapturaFacial.cshtml" />
+    <Content Include="Views\FacialRecognitionApi\Captura.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
