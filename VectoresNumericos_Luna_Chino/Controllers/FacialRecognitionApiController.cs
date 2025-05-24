@@ -16,7 +16,10 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         {
             return View();
         }
-
+        public ActionResult Registro()
+        {
+            return View();
+        }
         [HttpPost]
         public JsonResult RegistrarUsuarioMultiplesFotos(UserPhotoData data)
         {

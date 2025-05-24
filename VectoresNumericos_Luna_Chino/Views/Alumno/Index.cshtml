@@ -1,0 +1,10 @@
+﻿@model VectoresNumericos_Luna_Chino.Models.AlumnoViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAlumno.cshtml";
+    ViewBag.Title = "Dashboard Alumno";
+}
+
+<h1>Bienvenido, @Model.NombreCompleto</h1>
+<p>Correo: @Model.Correo</p>
+<p>Porcentaje de Asistencia: @Model.PorcentajeAsistencia %</p>

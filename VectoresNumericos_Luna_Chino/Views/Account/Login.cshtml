@@ -1,0 +1,53 @@
+﻿@model VectoresNumericos_Luna_Chino.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Source/LoginStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="box">
+        <div class="container">
+            <header>Iniciar Sesión</header>
+
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="input-field">
+                    @Html.TextBoxFor(m => m.Correo, new { @placeholder = "Correo electrónico", @class = "input", type = "email" })
+                    @Html.ValidationMessageFor(m => m.Correo, "", new { @style = "color: #f00;" })
+                </div>
+
+                <div class="input-field">
+                    @Html.PasswordFor(m => m.Contrasena, new { @placeholder = "Contraseña", @class = "input" })
+                    @Html.ValidationMessageFor(m => m.Contrasena, "", new { @style = "color: #f00;" })
+                </div>
+
+                <button type="submit" class="submit">Ingresar</button>
+
+                if (!ViewData.ModelState.IsValid)
+                {
+                    <div style="color:red; margin-top:10px;">
+                        @Html.ValidationSummary(true)
+                    </div>
+                }
+            }
+            <br>
+            <button type="button" class="btn btn-outline-primary" onclick="location.href='@Url.Action("Registro", "FacialRecognitionApi")'">
+                Registrarse
+            </button>
+
+        </div>
+       
+    </div>
+</body>
+</html>
