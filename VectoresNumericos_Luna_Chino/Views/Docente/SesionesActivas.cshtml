@@ -1,0 +1,46 @@
+﻿@model List<VectoresNumericos_Luna_Chino.Models.Sesion>
+
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Sesiones Activas";
+
+}
+}
+
+
+<h2>Sesiones Activas</h2>
+
+@if (!Model.Any())
+{
+    <p>No hay sesiones activas en este momento.</p>
+}
+else
+{
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr>
+                <th>ID Sesión</th>
+                <th>Nombre Sesión</th>
+                <th>Clase</th>
+                <th>Hora Inicio</th>
+                <th>Hora Fin</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sesion in Model)
+            {
+                <tr>
+                    <td>@sesion.IdSesion</td>
+                    <td>@sesion.NombreSesion</td>
+                    <td>@sesion.NombreClase</td>
+                    <td>@sesion.FechaHoraInicio.ToString("g")</td>
+                    <td>@sesion.FechaHoraFin.ToString("g")</td>
+                    <td>
+                        <a href="@Url.Action("IniciarReconocimiento", "Docente", new { idSesion = sesion.IdSesion })">Iniciar Reconocimiento</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

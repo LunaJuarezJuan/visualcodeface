@@ -1,0 +1,7 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAlumno.cshtml";
+    ViewBag.Title = "Dashboard Alumno";
+}
+
+<h1>Bienvenido, @((Session["Usuario"] as VectoresNumericos_Luna_Chino.Models.UsuarioViewModel)?.NombreCompleto ?? "Alumno")</h1>
+<p>Aquí puedes ver tus datos, asistencia y más.</p>

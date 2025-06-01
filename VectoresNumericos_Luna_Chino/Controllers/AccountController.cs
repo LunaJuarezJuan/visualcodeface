@@ -46,7 +46,6 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                             if (VerifyPassword(model.Contrasena, hashBD))
                             {
                                 // Aquí usuario autenticado correctamente
-                                // Crea sesión o cookie con datos del usuario
                                 var usuario = new UsuarioViewModel
                                 {
                                     IdUsuario = reader.GetInt32(reader.GetOrdinal("id_usuario")),
@@ -55,8 +54,10 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                                     Rol = reader.GetString(reader.GetOrdinal("rol"))
                                 };
 
-                                // Guarda datos en sesión
+                                // Guarda datos en sesión ANTES de redirigir
                                 Session["Usuario"] = usuario;
+                                Session["IdUsuario"] = usuario.IdUsuario;
+                                Session["Rol"] = usuario.Rol;
 
                                 // Redirige según rol
                                 if (usuario.Rol == "docente")
@@ -64,6 +65,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                                 else
                                     return RedirectToAction("DashboardAlumno", "Home");
                             }
+
                         }
                     }
                 }

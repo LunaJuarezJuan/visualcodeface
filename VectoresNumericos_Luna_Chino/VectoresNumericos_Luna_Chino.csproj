@@ -151,10 +151,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AlumnoViewModel.cs" />
+    <Compile Include="Models\AsistenciaAlumno.cs" />
     <Compile Include="Models\AsistenciaRepository.cs" />
+    <Compile Include="Models\Clase.cs" />
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PhotoData.cs" />
+    <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\UserPhotoData.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -162,8 +165,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Docente\Login.cshtml" />
-    <Content Include="Views\Docente\Panel.cshtml" />
     <Content Include="Views\FacialRecognition\Index.cshtml" />
     <Content Include="Views\FacialRecognition\CapturaFacial.cshtml" />
     <Content Include="Views\FacialRecognitionApi\Captura.cshtml" />
@@ -176,6 +177,13 @@
     <Content Include="Views\FacialRecognitionApi\Registro.cshtml" />
     <Content Include="Views\Shared\_LayoutAlumno.cshtml" />
     <Content Include="Views\Alumno\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutDocente.cshtml" />
+    <Content Include="Views\Docente\Index.cshtml" />
+    <Content Include="Views\Docente\ClasesDocente.cshtml" />
+    <Content Include="Views\Docente\ReporteAsistencia.cshtml" />
+    <None Include="Properties\PublishProfiles\ControlAsistenciaVECT - Web Deploy.pubxml" />
+    <Content Include="Views\Docente\CrearSesion.cshtml" />
+    <Content Include="Views\Docente\SesionesActivas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

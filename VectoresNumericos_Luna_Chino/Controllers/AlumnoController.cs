@@ -28,6 +28,10 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
             return View(model);
         }
-     
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
 }

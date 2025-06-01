@@ -1,0 +1,33 @@
+﻿@model List<VectoresNumericos_Luna_Chino.Models.AsistenciaAlumno>
+
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Panel Docente";
+
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Alumno</th>
+            <th>Fecha Sesión</th>
+            <th>Presente</th>
+            <th>Tardanza</th>
+            <th>Tiempo Presente (seg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.NombreAlumno</td>
+                <td>@r.FechaSesion.ToShortDateString()</td>
+                <td>@(r.Presente ? "Sí" : "No")</td>
+                <td>@(r.Tardanza ? "Sí" : "No")</td>
+                <td>@r.TiempoPresente</td>
+            </tr>
+        }
+    </tbody>
+</table>

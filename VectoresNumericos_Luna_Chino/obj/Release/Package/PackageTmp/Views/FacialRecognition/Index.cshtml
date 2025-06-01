@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Reconocimiento Facial";
+}
+
+<h2>Reconocimiento Facial</h2>
+
+<!-- Botón para ejecutar el script -->
+@Html.ActionLink("Iniciar Reconocimiento Facial", "EjecutarReconocimientoFacial", "FacialRecognition", null, new { @class = "btn btn-primary" })
+
+<!-- Mostrar la salida del proceso Python -->
+@if (ViewBag.Output != null)
+{
+    <div>
+        <h3>Resultado del Proceso</h3>
+        <pre>@ViewBag.Output</pre>
+    </div>
+}

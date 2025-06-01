@@ -1,0 +1,111 @@
+﻿    @{
+        ViewBag.Title = "Registro y Captura Facial Múltiple";
+    }
+
+    <h2>Registro y Captura Facial Múltiple</h2>
+
+    <video id="video" width="320" height="240" autoplay></video>
+    <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+    <br />
+
+    <label>Nombre Completo:</label>
+    <input type="text" id="nombre" placeholder="Ingrese su nombre completo" />
+
+    <br />
+
+    <label>Correo Electrónico:</label>
+    <input type="email" id="correo" placeholder="Ingrese su correo electrónico" />
+
+    <br />
+
+    <label>Contraseña:</label>
+    <input type="password" id="contrasena" placeholder="Ingrese su contraseña" />
+
+    <br />
+    <br />
+
+    <button id="snap">Tomar Foto</button>
+    <button id="submitPhotos" style="display:none;">Registrar y Guardar Fotos</button>
+
+    <h3>Fotos Capturadas:</h3>
+    <div id="photosContainer" style="display:flex; flex-wrap: wrap; gap:10px;"></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const snap = document.getElementById('snap');
+        const submitPhotos = document.getElementById('submitPhotos');
+        const photosContainer = document.getElementById('photosContainer');
+
+        const photos = []; // Array para almacenar imágenes en base64
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                alert("No se pudo acceder a la cámara: " + err);
+            });
+
+        snap.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const dataUrl = canvas.toDataURL('image/png');
+            photos.push(dataUrl);
+
+            // Mostrar miniaturas
+            const img = document.createElement('img');
+            img.src = dataUrl;
+            img.width = 100;
+            img.height = 75;
+            photosContainer.appendChild(img);
+
+            submitPhotos.style.display = 'inline-block';
+        });
+
+        submitPhotos.addEventListener('click', () => {
+            const nombre = document.getElementById('nombre').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const contrasena = document.getElementById('contrasena').value;
+
+            if (!nombre || !correo || !contrasena) {
+                alert('Por favor completa todos los campos.');
+                return;
+            }
+
+            if (photos.length === 0) {
+                alert('Por favor toma al menos una foto.');
+                return;
+            }
+
+            // Enviar las fotos una por una (puedes adaptar para enviar todas juntas)
+            // Aquí enviamos todas juntas en un array
+
+            fetch('@Url.Action("RegistrarUsuarioMultiplesFotos", "FacialRecognitionApi")', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    FotosBase64: photos,
+                    Nombre: nombre,
+                    Correo: correo,
+                    Contrasena: contrasena
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if(data.success){
+                    // Limpiar formulario y fotos
+                    photos.length = 0;
+                    photosContainer.innerHTML = '';
+                    submitPhotos.style.display = 'none';
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('correo').value = '';
+                    document.getElementById('contrasena').value = '';
+                }
+            })
+            .catch(err => alert('Error al registrar: ' + err));
+        });
+    </script>
