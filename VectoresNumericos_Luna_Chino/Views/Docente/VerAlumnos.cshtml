@@ -1,0 +1,34 @@
+﻿@model List<VectoresNumericos_Luna_Chino.Controllers.AlumnoClase>
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Alumnos de " + ViewBag.NombreClase;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Agregar Alumno", "AgregarAlumno", new { idClase = ViewBag.IdClase }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Volver a Clases", "ClasesDocente", null, new { @class = "btn btn-default" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo Electrónico</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alumno in Model)
+        {
+            <tr>
+                <td>@alumno.NombreAlumno</td>
+                <td>@alumno.CorreoAlumno</td>
+                <td>
+                    @Html.ActionLink("Ver Asistencia", "ReporteAsistenciaAlumno", new { idAlumno = alumno.IdAlumno, idClase = ViewBag.IdClase }, new { @class = "btn btn-info btn-xs" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

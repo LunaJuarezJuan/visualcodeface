@@ -1,0 +1,23 @@
+﻿@model string
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Agregar Alumno a " + ViewBag.NombreClase;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("idClase", (int)ViewBag.IdClase)
+
+    <div class="form-group">
+        <label for="correoAlumno">Correo Electrónico del Alumno:</label>
+        @Html.TextBox("correoAlumno", null, new { @class = "form-control", type = "email", required = "required" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar Alumno</button>
+    @Html.ActionLink("Cancelar", "VerAlumnos", new { idClase = ViewBag.IdClase }, new { @class = "btn btn-default" })
+
+    @Html.ValidationSummary()
+}

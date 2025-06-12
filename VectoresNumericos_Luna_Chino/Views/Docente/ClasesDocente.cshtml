@@ -1,35 +1,35 @@
 ﻿@model List<VectoresNumericos_Luna_Chino.Models.Clase>
-
 @{
     Layout = "~/Views/Shared/_LayoutDocente.cshtml";
-    ViewBag.Title = "Panel Docente";
+    ViewBag.Title = "Mis Clases";
 }
 
-<h2>Mis Clases</h2>
+<h2>@ViewBag.Title</h2>
 
-@if (!Model.Any())
-{
-    <p>No tienes clases asignadas.</p>
-}
-else
-{
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
+<p>
+    @Html.ActionLink("Crear Nueva Clase", "CrearClase", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var clase in Model)
+        {
             <tr>
-                <th>ID Clase</th>
-                <th>Nombre de la Clase</th>
-                <th>Descripción</th>
+                <td>@clase.NombreClase</td>
+                <td>@(clase.Descripcion ?? "Sin descripción")</td>
+                <td>
+                    @Html.ActionLink("Ver Alumnos", "VerAlumnos", new { idClase = clase.IdClase }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Agregar Alumnos", "AgregarAlumno", new { idClase = clase.IdClase }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Sesiones", "SesionesActivas", new { idClase = clase.IdClase }, new { @class = "btn btn-warning btn-xs" })
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var clase in Model)
-            {
-                <tr>
-                    <td>@clase.IdClase</td>
-                    <td>@clase.NombreClase</td>
-                    <td>@clase.Descripcion</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
