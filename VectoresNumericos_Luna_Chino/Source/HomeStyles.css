@@ -1,25 +1,24 @@
-﻿/* Estilos modernos para el dashboard de alumno con tonos azul claro */
+﻿/* HomeStyles.css - Estilo claro y moderno para el dashboard del alumno */
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e6f0ff; /* Azul muy claro de fondo */
-    color: #0a192f; /* Azul marino profundo para texto */
+    background-color: #e6f0ff !important; /* Fondo azul claro */
+    color: #0a192f !important; /* Texto azul oscuro */
 }
 
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #cbe4f9; /* Azul claro suave */
+    background-color: #b3d4fc; /* Azul claro */
     color: #0a192f;
     position: fixed;
     top: 0;
     left: 0;
     padding-top: 20px;
-    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    border-right: 2px solid #a3c8e7;
 }
 
     .sidebar header {
@@ -27,16 +26,15 @@ body {
         text-align: center;
         padding: 20px 0;
         font-weight: bold;
-        background-color: #a3c8e7; /* Azul claro más oscuro */
+        border-bottom: 1px solid #90c2f0;
         color: #0a192f;
         letter-spacing: 1px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .sidebar nav {
         display: flex;
         flex-direction: column;
-        padding: 15px 20px;
+        padding: 0 20px;
         flex-grow: 1;
     }
 
@@ -47,32 +45,31 @@ body {
             color: #0a192f;
             text-decoration: none;
             margin: 6px 0;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 10px;
+            transition: background-color 0.3s, color 0.3s;
             font-size: 15px;
             font-weight: 500;
         }
 
             .sidebar nav a i {
                 margin-right: 12px;
-                font-size: 16px;
             }
 
             .sidebar nav a:hover,
             .sidebar nav a.active {
-                background-color: #4b94d9; /* Azul acento más fuerte */
+                background-color: #64a9f7;
                 color: #ffffff;
             }
 
 .main-content {
     margin-left: 250px;
     padding: 35px;
-    background-color: #e6f0ff;
+    background-color: #e6f0ff; /* Coincide con el fondo */
     min-height: 100vh;
     color: #0a192f;
 }
 
-/* Responsive para móviles */
+/* Responsive */
 @media (max-width: 768px) {
     .sidebar {
         position: relative;
@@ -81,12 +78,8 @@ body {
         padding: 10px 0;
         flex-direction: row;
         overflow-x: auto;
-        border-right: none;
+        background-color: #b3d4fc;
     }
-
-        .sidebar header {
-            display: none;
-        }
 
         .sidebar nav {
             flex-direction: row;
