@@ -135,6 +135,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
     <Content Include="Images\back2.jpg" />
+    <Content Include="Source\DatosAlumno.css" />
     <Content Include="Source\HomeStyles.css" />
     <Content Include="Source\LoginStyles.css" />
     <Content Include="Source\IndexStyles.css" />
