@@ -1,0 +1,78 @@
+﻿/* Contenedor principal */
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    margin: 20px;
+}
+
+/* Título */
+h2 {
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Tabla */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+    .table thead {
+        background-color: #f1f1f1;
+    }
+
+    .table th, .table td {
+        vertical-align: middle !important;
+        padding: 12px 16px;
+    }
+
+/* Botones de acción */
+.acciones-botones a {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    color: #fff;
+}
+
+    .acciones-botones a:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+.acciones-botones .btn-info {
+    background-color: #17a2b8;
+}
+
+.acciones-botones .btn-success {
+    background-color: #28a745;
+}
+
+.acciones-botones .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+/* Botón principal para crear nueva clase */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }

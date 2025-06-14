@@ -1,0 +1,59 @@
+﻿/* Fondo general y tipografía */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6f8;
+    margin: 30px;
+    color: #333;
+}
+
+/* Título principal */
+h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Mensaje temporal (TempData) */
+.alert-success {
+    padding: 15px;
+    background-color: #d1f2d1;
+    color: #145c2c;
+    border: 1px solid #bde5bd;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+/* Enlaces de navegación del docente */
+.docente-links {
+    margin-top: 10px;
+}
+
+    .docente-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-right: 20px;
+        padding: 8px 12px;
+        background-color: #e9f1ff;
+        color: #0056b3;
+        border: 1px solid #cfe2ff;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.2s ease;
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+        .docente-links a i {
+            font-size: 14px;
+            color: #0056b3;
+        }
+
+        .docente-links a:hover {
+            background-color: #d6e6ff;
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
