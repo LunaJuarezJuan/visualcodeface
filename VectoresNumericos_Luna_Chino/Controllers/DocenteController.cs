@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using VectoresNumericos_Luna_Chino.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace VectoresNumericos_Luna_Chino.Controllers
 {
@@ -480,6 +482,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         #endregion
     }
 
+
     #region Modelos Adicionales
     public class SesionConClase : Sesion
     {
@@ -493,4 +496,12 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         public string CorreoAlumno { get; set; }
     }
     #endregion
+
+    public ActionResult Logout()
+    {
+        FormsAuthentication.SignOut();
+        Session.Clear();
+        return RedirectToAction("Login", "Account");
+    }
+
 }

@@ -1,0 +1,83 @@
+﻿/* DatosAlumno.css - Estilo claro y profesional para Dashboard Alumno */
+
+/* Títulos y texto general */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #0a192f;
+}
+
+p {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* Tarjeta (card) */
+.card {
+    background-color: #f0f8ff; /* Azul muy claro */
+    border: 1px solid #b3d4fc;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #0a192f;
+}
+
+/* Título dentro de la tarjeta */
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1976d2; /* Azul más fuerte */
+}
+
+/* Selector de tipo de gráfico */
+label[for="chartType"] {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #0a192f;
+}
+
+select.form-select {
+    background-color: #ffffff;
+    color: #0a192f;
+    border: 1px solid #90c2f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    select.form-select:focus {
+        outline: none;
+        border-color: #4b94d9;
+        box-shadow: 0 0 5px rgba(75, 148, 217, 0.4);
+    }
+
+/* Canvas del gráfico */
+canvas {
+    max-width: 100%;
+    margin: 20px auto 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Texto de porcentaje */
+.card p strong {
+    font-size: 20px;
+    color: #388e3c; /* Verde éxito */
+}
+
+
+
+body {
+    background: linear-gradient(135deg, #e6f0ff, #dbe8f5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    color: #0a192f;
+}

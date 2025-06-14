@@ -86,5 +86,16 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                 return hashInput == hash.ToLower();
             }
         }
+
+
+
+        public ActionResult Logout()
+        {
+            // Aquí puedes limpiar la sesión o hacer logout como prefieras
+            Session.Clear();
+            Session.Abandon();
+
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

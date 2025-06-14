@@ -1,35 +1,43 @@
 ﻿@model List<VectoresNumericos_Luna_Chino.Models.Clase>
+
 @{
     Layout = "~/Views/Shared/_LayoutDocente.cshtml";
     ViewBag.Title = "Mis Clases";
 }
 
-<h2>@ViewBag.Title</h2>
+@section Styles {
+    <link href="~/Source/ClasesDocenteStyles.css" rel="stylesheet" />
+}
 
-<p>
-    @Html.ActionLink("Crear Nueva Clase", "CrearClase", null, new { @class = "btn btn-primary" })
-</p>
+<div class="clases-container">
+    <h2 class="titulo-pagina"><i class="fas fa-chalkboard-teacher me-2"></i>@ViewBag.Title</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var clase in Model)
-        {
+    <p>
+        @Html.ActionLink("Crear Nueva Clase", "CrearClase", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-striped tabla-clases">
+        <thead>
             <tr>
-                <td>@clase.NombreClase</td>
-                <td>@(clase.Descripcion ?? "Sin descripción")</td>
-                <td>
-                    @Html.ActionLink("Ver Alumnos", "VerAlumnos", new { idClase = clase.IdClase }, new { @class = "btn btn-info btn-xs" })
-                    @Html.ActionLink("Agregar Alumnos", "AgregarAlumno", new { idClase = clase.IdClase }, new { @class = "btn btn-success btn-xs" })
-                    @Html.ActionLink("Sesiones", "SesionesActivas", new { idClase = clase.IdClase }, new { @class = "btn btn-warning btn-xs" })
-                </td>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var clase in Model)
+            {
+                <tr>
+                    <td>@clase.NombreClase</td>
+                    <td>@(clase.Descripcion ?? "Sin descripción")</td>
+                    <td class="acciones-botones">
+                        @Html.ActionLink("Ver Alumnos", "VerAlumnos", new { idClase = clase.IdClase }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Agregar Alumnos", "AgregarAlumno", new { idClase = clase.IdClase }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Sesiones", "SesionesActivas", new { idClase = clase.IdClase }, new { @class = "btn btn-warning" })
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
