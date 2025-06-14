@@ -1,0 +1,95 @@
+﻿/* Fondo general y fuente */
+body {
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+/* Título */
+h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #333;
+    }
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+/* Botones */
+button.btn {
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: white;
+}
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+/* Validación */
+.validation-summary-errors {
+    color: #dc3545;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Botón Cancelar generado con ActionLink (etiqueta <a>) */
+a.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+    a.btn-secondary:hover {
+        background-color: #5a6268;
+        transform: translateY(-1px);
+    }

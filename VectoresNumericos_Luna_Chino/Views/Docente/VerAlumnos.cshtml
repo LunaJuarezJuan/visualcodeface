@@ -4,14 +4,18 @@
     ViewBag.Title = "Alumnos de " + ViewBag.NombreClase;
 }
 
+@section Styles {
+    <link href="~/Source/VerAlumnosStyles.css" rel="stylesheet" />
+}
+
 <h2>@ViewBag.Title</h2>
 
-<p>
+<p class="acciones-superiores">
     @Html.ActionLink("Agregar Alumno", "AgregarAlumno", new { idClase = ViewBag.IdClase }, new { @class = "btn btn-success" })
-    @Html.ActionLink("Volver a Clases", "ClasesDocente", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Volver a Clases", "ClasesDocente", null, new { @class = "btn btn-secondary" })
 </p>
 
-<table class="table table-striped">
+<table class="table table-hover alumnos-table">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -26,7 +30,7 @@
                 <td>@alumno.NombreAlumno</td>
                 <td>@alumno.CorreoAlumno</td>
                 <td>
-                    @Html.ActionLink("Ver Asistencia", "ReporteAsistenciaAlumno", new { idAlumno = alumno.IdAlumno, idClase = ViewBag.IdClase }, new { @class = "btn btn-info btn-xs" })
+                    @Html.ActionLink("Ver Asistencia", "ReporteAsistenciaAlumno", new { idAlumno = alumno.IdAlumno, idClase = ViewBag.IdClase }, new { @class = "btn btn-info btn-sm" })
                 </td>
             </tr>
         }
