@@ -193,6 +193,8 @@
     <Content Include="Views\Docente\CrearClase.cshtml" />
     <Content Include="Views\Docente\AgregarAlumno.cshtml" />
     <Content Include="Views\Docente\VerAlumnos.cshtml" />
+    <Content Include="Views\Docente\SesionesPorClase.cshtml" />
+    <Content Include="Views\Docente\EditarSesion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,50 @@
+﻿@model VectoresNumericos_Luna_Chino.Models.Sesion
+
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Editar Sesión";
+}
+
+@section Styles {
+    <link href="~/Source/CrearSesionStyles.css" rel="stylesheet" />
+}
+
+<div class="crear-sesion-container">
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm("EditarSesion", "Docente", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger validation-summary" })
+        @Html.HiddenFor(m => m.IdSesion)
+
+        <div class="form-group">
+            <label for="nombreSesion">Nombre de la sesión</label>
+            @Html.TextBoxFor(m => m.NombreSesion, new { @class = "form-control", id = "nombreSesion", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label for="fechaHoraInicio">Fecha y hora de inicio:</label>
+            @Html.TextBoxFor(m => m.FechaHoraInicio, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", @class = "form-control", id = "fechaHoraInicio", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label for="fechaHoraFin">Fecha y hora de fin:</label>
+            @Html.TextBoxFor(m => m.FechaHoraFin, "{0:yyyy-MM-ddTHH:mm}", new { type = "datetime-local", @class = "form-control", id = "fechaHoraFin", required = "required" })
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control", id = "descripcion", rows = 3 })
+        </div>
+
+        <button type="submit" class="btn-submit">Guardar Cambios</button>
+        @Html.ActionLink("Cancelar", "SesionesActivas", null, new { @class = "btn-cancel" })
+    }
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+</div>

@@ -49,6 +49,14 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                 return View();
             }
 
+            // ✅ Validar máximo 2 horas
+            if ((fechaHoraFin.Value - fechaHoraInicio.Value).TotalHours > 2)
+            {
+                ModelState.AddModelError("", "La duración máxima de una sesión es de 2 horas.");
+                ViewBag.Clases = ObtenerClases(idDocente.Value);
+                return View();
+            }
+
             if (string.IsNullOrWhiteSpace(nombreSesion))
             {
                 ModelState.AddModelError("", "El nombre de la sesión es obligatorio.");
@@ -65,7 +73,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             {
                 conn.Open();
                 string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion, descripcion) 
-                     VALUES (@idDocente, @idClase, @fechaHoraInicio, @fechaHoraFin, @nombreSesion, @descripcion)";
+              VALUES (@idDocente, @idClase, @fechaHoraInicio, @fechaHoraFin, @nombreSesion, @descripcion)";
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
@@ -84,34 +92,49 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         }
 
 
-        // Listar sesiones activas
-        public ActionResult SesionesActivas()
+        public ActionResult SesionesActivas(string estadoFiltro = "todos", string claseFiltro = "todas")
         {
             int? idDocente = Session["IdUsuario"] as int?;
             if (idDocente == null || !EsDocente(idDocente.Value))
                 return RedirectToAction("Login", "Account");
 
             List<SesionConClase> sesiones = new List<SesionConClase>();
-            DateTime ahora = DateTime.Now;
+            var estados = new List<string> { "activo", "inactivo", "finalizado", "deshabilitado" };
+            var clases = new List<string>();
 
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = @"SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, s.fecha_hora_fin, s.descripcion, c.nombre_clase
-                              FROM sesiones s
-                              JOIN clases c ON s.id_clase = c.id_clase
-                              WHERE s.id_docente = @idDocente
-                              AND s.fecha_hora_inicio <= @ahora
-                              AND s.fecha_hora_fin >= @ahora
-                              ORDER BY s.fecha_hora_inicio";
+
+                string claseQuery = "SELECT DISTINCT nombre_clase FROM clases WHERE id_docente = @idDocente";
+                using (var cmdClase = new NpgsqlCommand(claseQuery, conn))
+                {
+                    cmdClase.Parameters.AddWithValue("idDocente", idDocente.Value);
+                    using (var reader = cmdClase.ExecuteReader())
+                        while (reader.Read()) clases.Add(reader.GetString(0));
+                }
+
+                string sql = @"
+            SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, 
+                   s.fecha_hora_fin, s.descripcion, c.nombre_clase, s.estado
+            FROM sesiones s
+            JOIN clases c ON s.id_clase = c.id_clase
+            WHERE s.id_docente = @idDocente";
+
+                if (estadoFiltro != "todos")
+                    sql += " AND s.estado = @estadoFiltro";
+                if (claseFiltro != "todas")
+                    sql += " AND c.nombre_clase = @claseFiltro";
+
+                sql += " ORDER BY s.fecha_hora_inicio DESC";
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
-                    cmd.Parameters.AddWithValue("ahora", ahora);
+                    if (estadoFiltro != "todos") cmd.Parameters.AddWithValue("estadoFiltro", estadoFiltro);
+                    if (claseFiltro != "todas") cmd.Parameters.AddWithValue("claseFiltro", claseFiltro);
 
                     using (var reader = cmd.ExecuteReader())
-                    {
                         while (reader.Read())
                         {
                             sesiones.Add(new SesionConClase
@@ -121,15 +144,22 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                                 FechaHoraInicio = reader.GetDateTime(2),
                                 FechaHoraFin = reader.GetDateTime(3),
                                 Descripcion = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                NombreClase = reader.GetString(5)
+                                NombreClase = reader.GetString(5),
+                                Estado = reader.GetString(6)
                             });
                         }
-                    }
                 }
             }
 
+            ViewBag.ListaEstados = estados;
+            ViewBag.ListaClases = clases;
+            ViewBag.EstadoFiltro = estadoFiltro;
+            ViewBag.ClaseFiltro = claseFiltro;
+
             return View(sesiones);
         }
+
+
 
         // GET: Página principal del docente
         public ActionResult Index()
@@ -478,6 +508,136 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                 }
             }
         }
+        public ActionResult EditarSesion(int idSesion)
+        {
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = @"SELECT id_sesion, nombre_sesion, fecha_hora_inicio, fecha_hora_fin, descripcion 
+                       FROM sesiones WHERE id_sesion = @idSesion";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("idSesion", idSesion);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            var sesion = new Sesion
+                            {
+                                IdSesion = reader.GetInt32(0),
+                                NombreSesion = reader.GetString(1),
+                                FechaHoraInicio = reader.GetDateTime(2),
+                                FechaHoraFin = reader.GetDateTime(3),
+                                Descripcion = reader.IsDBNull(4) ? "" : reader.GetString(4)
+                            };
+                            return View(sesion);
+                        }
+                    }
+                }
+            }
+
+            return RedirectToAction("SesionesActivas");
+        }
+
+        [HttpPost]
+        public ActionResult EditarSesion(Sesion sesion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sesion);
+            }
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = @"UPDATE sesiones 
+                       SET nombre_sesion = @nombre, 
+                           fecha_hora_inicio = @inicio, 
+                           fecha_hora_fin = @fin, 
+                           descripcion = @desc
+                       WHERE id_sesion = @id";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("nombre", sesion.NombreSesion);
+                    cmd.Parameters.AddWithValue("inicio", sesion.FechaHoraInicio);
+                    cmd.Parameters.AddWithValue("fin", sesion.FechaHoraFin);
+                    cmd.Parameters.AddWithValue("desc", (object)sesion.Descripcion ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("id", sesion.IdSesion);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            TempData["Mensaje"] = "Sesión actualizada correctamente.";
+            return RedirectToAction("SesionesActivas");
+        }
+
+        public ActionResult DeshabilitarSesion(int idSesion)
+        {
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "UPDATE sesiones SET estado = 'inactivo' WHERE id_sesion = @idSesion";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("idSesion", idSesion);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            TempData["Mensaje"] = "Sesión deshabilitada.";
+            return RedirectToAction("SesionesActivas");
+        }
+
+        public ActionResult SesionesPorClase(int idClase)
+        {
+            int? idDocente = Session["IdUsuario"] as int?;
+            if (idDocente == null || !EsDocente(idDocente.Value))
+                return RedirectToAction("Login", "Account");
+
+            if (!ClasePerteneceADocente(idClase, idDocente.Value))
+                return RedirectToAction("ClasesDocente");
+
+            List<SesionConClase> sesiones = new List<SesionConClase>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = @"SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, s.fecha_hora_fin, s.descripcion, c.nombre_clase
+                      FROM sesiones s
+                      JOIN clases c ON s.id_clase = c.id_clase
+                      WHERE s.id_clase = @idClase AND s.estado = 'activo'
+                      ORDER BY s.fecha_hora_inicio";
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("idClase", idClase);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            sesiones.Add(new SesionConClase
+                            {
+                                IdSesion = reader.GetInt32(0),
+                                NombreSesion = reader.GetString(1),
+                                FechaHoraInicio = reader.GetDateTime(2),
+                                FechaHoraFin = reader.GetDateTime(3),
+                                Descripcion = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                                NombreClase = reader.GetString(5)
+                            });
+                        }
+                    }
+                }
+            }
+
+            ViewBag.IdClase = idClase;
+            ViewBag.NombreClase = ObtenerNombreClase(idClase);
+            return View("SesionesPorClase", sesiones);
+        }
+
 
         private int ObtenerSesionActivaParaClase(int idClase, NpgsqlConnection conn)
         {
@@ -514,6 +674,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         public class SesionConClase : Sesion
         {
             public string NombreClase { get; set; }
+            public string Estado { get; set; }
         }
 
        

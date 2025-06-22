@@ -33,7 +33,8 @@
                     <td class="acciones-botones">
                         @Html.ActionLink("Ver Alumnos", "VerAlumnos", new { idClase = clase.IdClase }, new { @class = "btn btn-info" })
                         @Html.ActionLink("Agregar Alumnos", "AgregarAlumno", new { idClase = clase.IdClase }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Sesiones", "SesionesActivas", new { idClase = clase.IdClase }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Sesiones", "SesionesPorClase", new { idClase = clase.IdClase }, new { @class = "btn btn-warning" })
+
                     </td>
 
                 </tr>

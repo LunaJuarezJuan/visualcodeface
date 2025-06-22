@@ -60,6 +60,17 @@ h2 {
     background-color: #ffc107;
     color: #212529;
 }
+.form-inline .form-group {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.form-inline select {
+    width: auto;
+    min-width: 150px;
+    padding: 5px;
+    border-radius: 5px;
+}
 
 /* Botón principal para crear nueva clase */
 .btn-primary {

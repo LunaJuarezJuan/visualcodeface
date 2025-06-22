@@ -13,5 +13,6 @@ namespace VectoresNumericos_Luna_Chino.Models
         public DateTime FechaHoraFin { get; set; }
         public string Descripcion { get; set; }
         public string NombreClase { get; set; } // Info adicional
+        public string Estado { get; set; }
     }
 }
