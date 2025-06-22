@@ -5,13 +5,12 @@
     Layout = null;
 }
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="~/Source/LoginStyles.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Source/LoginStyles.css")" rel="stylesheet" />
 </head>
 <body>
     <div class="box">
@@ -42,12 +41,10 @@
                 }
             }
             <br>
-            <button type="button" class="btn btn-outline-primary" onclick="location.href='@Url.Action("Registro", "FacialRecognitionApi")'">
+            <button type="button" class="btn-register" onclick="location.href='@Url.Action("Registro", "FacialRecognitionApi")'">
                 Registrarse
             </button>
-
         </div>
-       
     </div>
 </body>
 </html>

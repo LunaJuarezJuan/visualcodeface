@@ -8,12 +8,18 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="~/Source/HomeStyles.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Source/RegistroStyles.css")" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <center>
         <h2>Registro y Captura Facial Múltiple</h2>
+
+        <p class="info-nota">
+            ⚠️ Para un registro correcto, asegúrate de tener una cámara activa y tomar varias fotos de tu rostro:
+            una de frente, y otras desde ángulos laterales (perfil izquierdo y derecho).
+        </p>
+
 
         <video id="video" width="320" height="240" autoplay></video>
         <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
@@ -42,6 +48,13 @@
         <h3>Fotos Capturadas:</h3>
         <div id="photosContainer" style="display:flex; flex-wrap: wrap; gap:10px;"></div>
 
+        <br />
+
+        <button onclick="location.href='@Url.Action("Login", "Account")'" style="background-color: rgba(231, 76, 60, 0.8); color: #fff;">
+            Ir al Inicio de Sesión
+        </button>
+
+
         <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
@@ -66,7 +79,6 @@
             const dataUrl = canvas.toDataURL('image/png');
             photos.push(dataUrl);
 
-            // Mostrar miniaturas
             const img = document.createElement('img');
             img.src = dataUrl;
             img.width = 100;
@@ -91,9 +103,6 @@
                 return;
             }
 
-            // Enviar las fotos una por una (puedes adaptar para enviar todas juntas)
-            // Aquí enviamos todas juntas en un array
-
             fetch('@Url.Action("RegistrarUsuarioMultiplesFotos", "FacialRecognitionApi")', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -108,7 +117,6 @@
             .then(data => {
                 alert(data.message);
                 if(data.success){
-                    // Limpiar formulario y fotos
                     photos.length = 0;
                     photosContainer.innerHTML = '';
                     submitPhotos.style.display = 'none';

@@ -1,0 +1,31 @@
+﻿@model string
+@{
+    Layout = "~/Views/Shared/_LayoutDocente.cshtml";
+    ViewBag.Title = "Crear Nueva Clase";
+}
+
+@section Styles {
+    <link href="~/Source/CrearClaseStyles.css" rel="stylesheet" />
+}
+
+<h2>Crear Nueva Clase</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="nombreClase">Nombre de la Clase:</label>
+        @Html.TextBox("nombreClase", null, new { @class = "form-control", required = "required" })
+    </div>
+
+    <div class="form-group">
+        <label for="descripcion">Descripción (opcional):</label>
+        @Html.TextArea("descripcion", null, new { @class = "form-control", rows = "3" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Clase</button>
+    @Html.ActionLink("Cancelar", "ClasesDocente", null, new { @class = "btn btn-secondary" })
+
+    @Html.ValidationSummary()
+}

@@ -1,4 +1,7 @@
-﻿@{
+﻿@model List<VectoresNumericos_Luna_Chino.Models.SesionConClase>
+
+
+@{
     ViewBag.Title = "Crear Sesión";
     Layout = "~/Views/Shared/_LayoutDocente.cshtml";
 }
@@ -35,7 +38,17 @@
             <input type="datetime-local" id="fechaHoraFin" name="fechaHoraFin" required class="form-control" />
         </div>
 
+        <div class="form-group">
+            <label for="nombreSesion">Nombre de la sesión</label>
+            <input type="text" class="form-control" id="nombreSesion" name="nombreSesion" required />
+        </div>
+
         <button type="submit" class="btn-submit">Crear Sesión</button>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+        </div>
+
     }
 
     @if (TempData["Mensaje"] != null)

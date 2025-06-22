@@ -135,6 +135,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\back.jpg" />
     <Content Include="Images\back2.jpg" />
+    <Content Include="Images\ImageIndex.jpg" />
     <Content Include="Source\DatosAlumno.css" />
     <Content Include="Source\HomeStyles.css" />
     <Content Include="Source\LoginStyles.css" />
@@ -153,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlumnoClase.cs" />
     <Compile Include="Models\AlumnoViewModel.cs" />
     <Compile Include="Models\AsistenciaAlumno.cs" />
     <Compile Include="Models\AsistenciaRepository.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PhotoData.cs" />
     <Compile Include="Models\Sesion.cs" />
+    <Compile Include="Models\SesionConClase.cs" />
     <Compile Include="Models\UserPhotoData.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

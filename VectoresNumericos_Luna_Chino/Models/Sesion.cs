@@ -14,5 +14,6 @@ namespace VectoresNumericos_Luna_Chino.Models
         public DateTime FechaHoraInicio { get; set; }
         public DateTime FechaHoraFin { get; set; }
         public string Descripcion { get; set; }
+
     }
 }

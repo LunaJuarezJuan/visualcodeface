@@ -2,34 +2,42 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutDocente.cshtml";
-    ViewBag.Title = "Panel Docente";
+    ViewBag.Title = "Mis Clases";
 }
 
-<h2>Mis Clases</h2>
-
-@if (!Model.Any())
-{
-    <p>No tienes clases asignadas.</p>
+@section Styles {
+    <link href="~/Source/ClasesDocenteStyles.css" rel="stylesheet" />
 }
-else
-{
-    <table border="1" cellpadding="5" cellspacing="0">
+
+<div class="clases-container">
+    <h2 class="titulo-pagina"><i class="fas fa-chalkboard-teacher me-2"></i>@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Crear Nueva Clase", "CrearClase", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-striped tabla-clases">
         <thead>
             <tr>
-                <th>ID Clase</th>
-                <th>Nombre de la Clase</th>
+                <th>Nombre</th>
                 <th>Descripción</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var clase in Model)
             {
                 <tr>
-                    <td>@clase.IdClase</td>
                     <td>@clase.NombreClase</td>
-                    <td>@clase.Descripcion</td>
+                    <td>@(clase.Descripcion ?? "Sin descripción")</td>
+                    <td class="acciones-botones">
+                        @Html.ActionLink("Ver Alumnos", "VerAlumnos", new { idClase = clase.IdClase }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Agregar Alumnos", "AgregarAlumno", new { idClase = clase.IdClase }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Sesiones", "SesionesActivas", new { idClase = clase.IdClase }, new { @class = "btn btn-warning" })
+                    </td>
+
                 </tr>
             }
         </tbody>
     </table>
-}
+</div>

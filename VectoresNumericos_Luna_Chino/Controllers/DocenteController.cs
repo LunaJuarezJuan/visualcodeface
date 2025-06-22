@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using VectoresNumericos_Luna_Chino.Models;
+
 using static System.Collections.Specialized.BitVector32;
 
 namespace VectoresNumericos_Luna_Chino.Controllers
@@ -27,7 +28,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
         // POST: Recibir datos para crear sesión
         [HttpPost]
-        public ActionResult CrearSesion(int idClase, DateTime? fechaHoraInicio, DateTime? fechaHoraFin, string nombreSesion)
+        public ActionResult CrearSesion(int idClase, DateTime? fechaHoraInicio, DateTime? fechaHoraFin, string nombreSesion, string descripcion)
         {
             int? idDocente = Session["IdUsuario"] as int?;
             if (idDocente == null || !EsDocente(idDocente.Value))
@@ -55,11 +56,16 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                 return View();
             }
 
+            if (string.IsNullOrWhiteSpace(descripcion))
+            {
+                descripcion = "";
+            }
+
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion) 
-                             VALUES (@idDocente, @idClase, @fechaHoraInicio, @fechaHoraFin, @nombreSesion)";
+                string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion, descripcion) 
+                     VALUES (@idDocente, @idClase, @fechaHoraInicio, @fechaHoraFin, @nombreSesion, @descripcion)";
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
@@ -68,6 +74,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                     cmd.Parameters.AddWithValue("fechaHoraInicio", fechaHoraInicio.Value);
                     cmd.Parameters.AddWithValue("fechaHoraFin", fechaHoraFin.Value);
                     cmd.Parameters.AddWithValue("nombreSesion", nombreSesion);
+                    cmd.Parameters.AddWithValue("descripcion", descripcion);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -75,6 +82,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             TempData["Mensaje"] = "Sesión creada correctamente.";
             return RedirectToAction("SesionesActivas");
         }
+
 
         // Listar sesiones activas
         public ActionResult SesionesActivas()
@@ -190,7 +198,6 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             return RedirectToAction("ClasesDocente");
         }
 
-        // GET: Mostrar alumnos de una clase
         public ActionResult VerAlumnos(int idClase)
         {
             int? idDocente = Session["IdUsuario"] as int?;
@@ -200,16 +207,16 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             if (!ClasePerteneceADocente(idClase, idDocente.Value))
                 return RedirectToAction("ClasesDocente");
 
-            List<AlumnoClase> alumnos = new List<AlumnoClase>();
+            List<AlumnoClase> alumnos = new List<AlumnoClase>(); // <--- Models.AlumnoClase
 
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
                 string sql = @"SELECT u.id_usuario, u.nombre_completo, u.correo
-                             FROM inscripciones i
-                             JOIN usuarios u ON i.id_usuario = u.id_usuario
-                             JOIN sesiones s ON i.id_sesion = s.id_sesion
-                             WHERE s.id_clase = @idClase";
+                     FROM inscripciones i
+                     JOIN usuarios u ON i.id_usuario = u.id_usuario
+                     JOIN sesiones s ON i.id_sesion = s.id_sesion
+                     WHERE s.id_clase = @idClase";
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
@@ -231,8 +238,9 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
             ViewBag.IdClase = idClase;
             ViewBag.NombreClase = ObtenerNombreClase(idClase);
-            return View(alumnos);
+            return View(alumnos); // ✔️ Ya devuelve Models.AlumnoClase
         }
+
 
         // GET: Mostrar formulario para agregar alumno
         public ActionResult AgregarAlumno(int idClase)
@@ -343,7 +351,8 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = @"SELECT u.nombre_completo, a.fecha_registro, 
+
+                /* string sql = @"SELECT u.nombre_completo, a.fecha_registro, 
                              CASE WHEN a.estado = 'presente' THEN true ELSE false END AS presente,
                              CASE WHEN a.estado = 'tarde' THEN true ELSE false END AS tardanza,
                              0 AS tiempo_presente
@@ -351,23 +360,41 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                              JOIN usuarios u ON a.id_usuario = u.id_usuario
                              JOIN sesiones s ON a.id_sesion = s.id_sesion
                              WHERE s.id_clase = @idClase
-                             ORDER BY u.nombre_completo, a.fecha_registro";
+                             ORDER BY u.nombre_completo, a.fecha_registro";*/
+
+               
+              string sql = @" SELECT u.nombre_completo, a.fecha_sesion, 
+                                     a.presente, a.tardanza, a.tiempo_presente
+                              FROM asistencia_sesion a
+                              JOIN usuarios u ON a.id_usuario = u.id_usuario
+                              JOIN sesiones s ON a.id_sesion = s.id_sesion
+                              WHERE s.id_clase = @idClase
+                              ORDER BY u.nombre_completo, a.fecha_sesion";
+
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("idClase", idClase);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
+              {
+                  cmd.Parameters.AddWithValue("idClase", idClase);
+                  using (var reader = cmd.ExecuteReader())
+                  {
+                      while (reader.Read())
+                      {
+                            /* reportes.Add(new AsistenciaAlumno
+                           {
+                               NombreAlumno = reader.GetString(0),
+                               FechaSesion = reader.GetDateTime(1),
+                               Presente = reader.GetBoolean(2),
+                               Tardanza = reader.GetBoolean(3),
+                               TiempoPresente = reader.GetInt32(4)
+                           });*/
                             reportes.Add(new AsistenciaAlumno
-                            {
-                                NombreAlumno = reader.GetString(0),
-                                FechaSesion = reader.GetDateTime(1),
-                                Presente = reader.GetBoolean(2),
-                                Tardanza = reader.GetBoolean(3),
-                                TiempoPresente = reader.GetInt32(4)
-                            });
+                             {
+                                 NombreAlumno = reader.GetString(0),
+                                 FechaSesion = reader.GetDateTime(1),
+                                 Presente = reader.GetBoolean(2),
+                                 Tardanza = reader.GetBoolean(3),
+                                 TiempoPresente = reader.GetInt32(4)
+                             });
                         }
                     }
                 }
@@ -480,28 +507,23 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             }
         }
         #endregion
+
+
+
+        
+        public class SesionConClase : Sesion
+        {
+            public string NombreClase { get; set; }
+        }
+
+       
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            return RedirectToAction("Login", "Account");
+        }
+
     }
-
-
-    #region Modelos Adicionales
-    public class SesionConClase : Sesion
-    {
-        public string NombreClase { get; set; }
-    }
-
-    public class AlumnoClase
-    {
-        public int IdAlumno { get; set; }
-        public string NombreAlumno { get; set; }
-        public string CorreoAlumno { get; set; }
-    }
-    #endregion
-
-    public ActionResult Logout()
-    {
-        FormsAuthentication.SignOut();
-        Session.Clear();
-        return RedirectToAction("Login", "Account");
-    }
-
 }
