@@ -158,7 +158,32 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
             return View(sesiones);
         }
+        public ActionResult QuitarAlumno(int idAlumno, int idClase)
+        {
+            int? idDocente = Session["IdUsuario"] as int?;
+            if (idDocente == null || !EsDocente(idDocente.Value))
+                return RedirectToAction("Login", "Account");
 
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
+
+                // Obtener la sesión activa de la clase
+                int idSesion = ObtenerSesionActivaParaClase(idClase, conn);
+
+                // Eliminar inscripción del alumno en esa sesión
+                string sql = "DELETE FROM inscripciones WHERE id_usuario = @idAlumno AND id_sesion = @idSesion";
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("idAlumno", idAlumno);
+                    cmd.Parameters.AddWithValue("idSesion", idSesion);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            TempData["Mensaje"] = "Alumno retirado de la clase correctamente.";
+            return RedirectToAction("VerAlumnos", new { idClase = idClase });
+        }
 
 
         // GET: Página principal del docente
