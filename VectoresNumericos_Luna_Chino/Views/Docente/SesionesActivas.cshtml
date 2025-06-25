@@ -1,4 +1,4 @@
-﻿@model List<VectoresNumericos_Luna_Chino.Controllers.DocenteController.SesionConClase>
+﻿@model List<VectoresNumericos_Luna_Chino.Models.SesionConClase>
 
 @{
     Layout = "~/Views/Shared/_LayoutDocente.cshtml";
@@ -37,6 +37,13 @@
 
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
+
+    <a href="@Url.Action("ExportarPdf", "Docente", new { estadoFiltro = ViewBag.EstadoFiltro, claseFiltro = ViewBag.ClaseFiltro })"
+       class="btn btn-danger ms-2">
+        <i class="fas fa-file-pdf"></i> Exportar a PDF
+    </a>
+   
+
 
     @if (!Model.Any())
     {

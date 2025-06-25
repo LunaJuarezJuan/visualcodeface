@@ -1,10 +1,15 @@
 ﻿using Npgsql;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
 using VectoresNumericos_Luna_Chino.Models;
 
 using static System.Collections.Specialized.BitVector32;
@@ -28,13 +33,12 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
         // POST: Recibir datos para crear sesión
         [HttpPost]
-        public ActionResult CrearSesion(int idClase, DateTime? fechaHoraInicio, DateTime? fechaHoraFin, string nombreSesion, string descripcion)
+        public ActionResult CrearSesion(int idClase, DateTime? fechaHoraInicio, DateTime? fechaHoraFin, string nombreSesion, string descripcion, bool sesionesRecurrentes = false)
         {
             int? idDocente = Session["IdUsuario"] as int?;
             if (idDocente == null || !EsDocente(idDocente.Value))
                 return RedirectToAction("Login", "Account");
 
-            // Validaciones
             if (!fechaHoraInicio.HasValue || !fechaHoraFin.HasValue)
             {
                 ModelState.AddModelError("", "La fecha y hora de inicio y fin son obligatorias.");
@@ -44,12 +48,11 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
             if (fechaHoraInicio >= fechaHoraFin)
             {
-                ModelState.AddModelError("", "La fecha y hora de inicio debe ser menor que la de fin.");
+                ModelState.AddModelError("", "La fecha de inicio debe ser menor a la fecha de fin.");
                 ViewBag.Clases = ObtenerClases(idDocente.Value);
                 return View();
             }
 
-            // ✅ Validar máximo 2 horas
             if ((fechaHoraFin.Value - fechaHoraInicio.Value).TotalHours > 2)
             {
                 ModelState.AddModelError("", "La duración máxima de una sesión es de 2 horas.");
@@ -72,23 +75,87 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion, descripcion) 
-              VALUES (@idDocente, @idClase, @fechaHoraInicio, @fechaHoraFin, @nombreSesion, @descripcion)";
 
-                using (var cmd = new NpgsqlCommand(sql, conn))
+                if (sesionesRecurrentes)
+                {
+                    DateTime inicio = fechaHoraInicio.Value;
+                    DateTime fin = fechaHoraFin.Value;
+                    for (int i = 0; i < 24; i++) // 6 meses ≈ 24 semanas
+                    {
+                        DateTime nuevaInicio = inicio.AddDays(7 * i);
+                        DateTime nuevaFin = fin.AddDays(7 * i);
+
+                        string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion, descripcion) 
+                               VALUES (@idDocente, @idClase, @fechaInicio, @fechaFin, @nombreSesion, @descripcion)";
+                        using (var cmd = new NpgsqlCommand(sql, conn))
+                        {
+                            cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
+                            cmd.Parameters.AddWithValue("idClase", idClase);
+                            cmd.Parameters.AddWithValue("fechaInicio", nuevaInicio);
+                            cmd.Parameters.AddWithValue("fechaFin", nuevaFin);
+                            cmd.Parameters.AddWithValue("nombreSesion", nombreSesion);
+                            cmd.Parameters.AddWithValue("descripcion", descripcion);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    TempData["Mensaje"] = "Sesiones semanales creadas correctamente.";
+                }
+                else
+                {
+                    string sql = @"INSERT INTO sesiones (id_docente, id_clase, fecha_hora_inicio, fecha_hora_fin, nombre_sesion, descripcion) 
+                           VALUES (@idDocente, @idClase, @fechaInicio, @fechaFin, @nombreSesion, @descripcion)";
+                    using (var cmd = new NpgsqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
+                        cmd.Parameters.AddWithValue("idClase", idClase);
+                        cmd.Parameters.AddWithValue("fechaInicio", fechaHoraInicio.Value);
+                        cmd.Parameters.AddWithValue("fechaFin", fechaHoraFin.Value);
+                        cmd.Parameters.AddWithValue("nombreSesion", nombreSesion);
+                        cmd.Parameters.AddWithValue("descripcion", descripcion);
+                        cmd.ExecuteNonQuery();
+                    }
+                    TempData["Mensaje"] = "Sesión creada correctamente.";
+                }
+
+                // Obtener sesiones de la semana para mostrar en vista
+                DateTime inicioSemana = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + 1); // lunes
+                DateTime finSemana = inicioSemana.AddDays(6); // domingo
+
+                string sqlSesionesSemana = @"SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, s.fecha_hora_fin, c.nombre_clase 
+                                     FROM sesiones s 
+                                     JOIN clases c ON s.id_clase = c.id_clase 
+                                     WHERE s.id_docente = @idDocente 
+                                       AND s.fecha_hora_inicio BETWEEN @inicioSemana AND @finSemana
+                                     ORDER BY s.fecha_hora_inicio";
+
+                using (var cmd = new NpgsqlCommand(sqlSesionesSemana, conn))
                 {
                     cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
-                    cmd.Parameters.AddWithValue("idClase", idClase);
-                    cmd.Parameters.AddWithValue("fechaHoraInicio", fechaHoraInicio.Value);
-                    cmd.Parameters.AddWithValue("fechaHoraFin", fechaHoraFin.Value);
-                    cmd.Parameters.AddWithValue("nombreSesion", nombreSesion);
-                    cmd.Parameters.AddWithValue("descripcion", descripcion);
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("inicioSemana", inicioSemana);
+                    cmd.Parameters.AddWithValue("finSemana", finSemana);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var sesionesSemana = new List<SesionConClase>();
+                        while (reader.Read())
+                        {
+                            sesionesSemana.Add(new SesionConClase
+                            {
+                                IdSesion = reader.GetInt32(0),
+                                NombreSesion = reader.GetString(1),
+                                FechaHoraInicio = reader.GetDateTime(2),
+                                FechaHoraFin = reader.GetDateTime(3),
+                                NombreClase = reader.GetString(4)
+                            });
+                        }
+
+                        ViewBag.SesionesSemana = sesionesSemana;
+                    }
                 }
             }
 
-            TempData["Mensaje"] = "Sesión creada correctamente.";
-            return RedirectToAction("SesionesActivas");
+            ViewBag.Clases = ObtenerClases(idDocente.Value);
+            return View();
         }
 
 
@@ -98,14 +165,14 @@ namespace VectoresNumericos_Luna_Chino.Controllers
             if (idDocente == null || !EsDocente(idDocente.Value))
                 return RedirectToAction("Login", "Account");
 
-            List<SesionConClase> sesiones = new List<SesionConClase>();
+            var sesiones = ObtenerSesionesFiltradas(idDocente.Value, estadoFiltro, claseFiltro);
+
             var estados = new List<string> { "activo", "inactivo", "finalizado", "deshabilitado" };
             var clases = new List<string>();
 
             using (var conn = new NpgsqlConnection(connectionString))
             {
                 conn.Open();
-
                 string claseQuery = "SELECT DISTINCT nombre_clase FROM clases WHERE id_docente = @idDocente";
                 using (var cmdClase = new NpgsqlCommand(claseQuery, conn))
                 {
@@ -113,13 +180,33 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                     using (var reader = cmdClase.ExecuteReader())
                         while (reader.Read()) clases.Add(reader.GetString(0));
                 }
+            }
+
+            ViewBag.ListaEstados = estados;
+            ViewBag.ListaClases = clases;
+            ViewBag.EstadoFiltro = estadoFiltro;
+            ViewBag.ClaseFiltro = claseFiltro;
+
+            return View(sesiones);
+        }
+
+        //parafiltrar para el excel 
+        private List<SesionConClase> ObtenerSesionesFiltradas(int idDocente, string estadoFiltro, string claseFiltro)
+        {
+            List<SesionConClase> sesiones = new List<SesionConClase>();
+
+            using (var conn = new NpgsqlConnection(connectionString))
+            {
+                conn.Open();
 
                 string sql = @"
             SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, 
                    s.fecha_hora_fin, s.descripcion, c.nombre_clase, s.estado
             FROM sesiones s
             JOIN clases c ON s.id_clase = c.id_clase
-            WHERE s.id_docente = @idDocente";
+            WHERE s.id_docente = @idDocente
+              AND DATE_TRUNC('month', s.fecha_hora_inicio) = DATE_TRUNC('month', CURRENT_DATE)
+              AND s.estado = 'activo'";
 
                 if (estadoFiltro != "todos")
                     sql += " AND s.estado = @estadoFiltro";
@@ -130,11 +217,12 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
+                    cmd.Parameters.AddWithValue("idDocente", idDocente);
                     if (estadoFiltro != "todos") cmd.Parameters.AddWithValue("estadoFiltro", estadoFiltro);
                     if (claseFiltro != "todas") cmd.Parameters.AddWithValue("claseFiltro", claseFiltro);
 
                     using (var reader = cmd.ExecuteReader())
+                    {
                         while (reader.Read())
                         {
                             sesiones.Add(new SesionConClase
@@ -148,16 +236,64 @@ namespace VectoresNumericos_Luna_Chino.Controllers
                                 Estado = reader.GetString(6)
                             });
                         }
+                    }
                 }
             }
 
-            ViewBag.ListaEstados = estados;
-            ViewBag.ListaClases = clases;
-            ViewBag.EstadoFiltro = estadoFiltro;
-            ViewBag.ClaseFiltro = claseFiltro;
-
-            return View(sesiones);
+            return sesiones;
         }
+        //getpdf
+        [HttpGet]
+        public ActionResult ExportarPDF(string estadoFiltro, string claseFiltro)
+        {
+            int? idDocente = Session["IdUsuario"] as int?;
+            if (idDocente == null)
+                return RedirectToAction("Login", "Account");
+
+            var sesiones = ObtenerSesionesFiltradas(idDocente.Value, estadoFiltro, claseFiltro);
+
+            using (var ms = new MemoryStream())
+            {
+                var doc = new Document(PageSize.A4.Rotate(), 20f, 20f, 20f, 20f);
+                PdfWriter.GetInstance(doc, ms);
+                doc.Open();
+
+                var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                doc.Add(new Paragraph("Sesiones activas del docente", titleFont));
+                doc.Add(new Paragraph(" "));
+
+                var table = new PdfPTable(6) { WidthPercentage = 100 };
+                table.SetWidths(new float[] { 1, 3, 3, 3, 3, 2 });
+
+                string[] headers = { "ID", "Nombre Sesión", "Clase", "Inicio", "Fin", "Estado" };
+                var headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                foreach (var h in headers)
+                {
+                    var cell = new PdfPCell(new Phrase(h, headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY };
+                    table.AddCell(cell);
+                }
+
+                var cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var sesion in sesiones)
+                {
+                    table.AddCell(new Phrase(sesion.IdSesion.ToString(), cellFont));
+                    table.AddCell(new Phrase(sesion.NombreSesion, cellFont));
+                    table.AddCell(new Phrase(sesion.NombreClase, cellFont));
+                    table.AddCell(new Phrase(sesion.FechaHoraInicio.ToString("g"), cellFont));
+                    table.AddCell(new Phrase(sesion.FechaHoraFin.ToString("g"), cellFont));
+                    table.AddCell(new Phrase(sesion.Estado, cellFont));
+                }
+
+                doc.Add(table);
+                doc.Close();
+
+                return File(ms.ToArray(), "application/pdf", "Sesiones_Activas.pdf");
+            }
+        }
+
+        //pdf
+
+
         public ActionResult QuitarAlumno(int idAlumno, int idClase)
         {
             int? idDocente = Session["IdUsuario"] as int?;
@@ -695,13 +831,7 @@ namespace VectoresNumericos_Luna_Chino.Controllers
 
 
 
-        
-        public class SesionConClase : Sesion
-        {
-            public string NombreClase { get; set; }
-            public string Estado { get; set; }
-        }
-
+       
        
 
         public ActionResult Logout()
