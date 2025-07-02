@@ -829,10 +829,54 @@ namespace VectoresNumericos_Luna_Chino.Controllers
         }
         #endregion
 
+        public ActionResult Calendario()
+{
+    int? idDocente = Session["IdUsuario"] as int?;
+    if (idDocente == null || !EsDocente(idDocente.Value))
+        return RedirectToAction("Login", "Account");
+
+    List<SesionConClase> sesiones = new List<SesionConClase>();
+
+    using (var conn = new NpgsqlConnection(connectionString))
+    {
+        conn.Open();
+
+        // Consulta modificada para incluir sesiones futuras y pasadas
+        string sql = @"
+            SELECT s.id_sesion, s.nombre_sesion, s.fecha_hora_inicio, 
+                   s.fecha_hora_fin, s.descripcion, c.nombre_clase, s.estado
+            FROM sesiones s
+            JOIN clases c ON s.id_clase = c.id_clase
+            WHERE s.id_docente = @idDocente
+            ORDER BY s.fecha_hora_inicio";
+
+        using (var cmd = new NpgsqlCommand(sql, conn))
+        {
+            cmd.Parameters.AddWithValue("idDocente", idDocente.Value);
+
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    sesiones.Add(new SesionConClase
+                    {
+                        IdSesion = reader.GetInt32(0),
+                        NombreSesion = reader.GetString(1),
+                        FechaHoraInicio = reader.GetDateTime(2),
+                        FechaHoraFin = reader.GetDateTime(3),
+                        Descripcion = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                        NombreClase = reader.GetString(5),
+                        Estado = reader.GetString(6)
+                    });
+                }
+            }
+        }
+    }
+
+    return View(sesiones);
+}
 
 
-       
-       
 
         public ActionResult Logout()
         {
